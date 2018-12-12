@@ -1,0 +1,46 @@
+.row {
+    display: flex;
+}
+
+.row:last-of-type .cell {
+    border-bottom: 1px solid black;
+}
+
+.cell {
+    width: 15px;
+    height: 15px;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+}
+
+.cell:last-of-type {
+    border-right: 1px solid black;
+}
+
+.grey {
+    background-color: grey;
+}
+
+.red {
+    background-color: #ff0000;
+}
+
+.pop {
+    display: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.game-over {
+    font-size: 64px;
+    text-transform: uppercase;
+    color: #ff0000;
+}
+
+.visible {
+    display: block;
+}

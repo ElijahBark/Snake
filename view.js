@@ -1,4 +1,5 @@
 let View = function () {
+    this.document = document;
 };
 
 View.drawNewField = function (amount) {

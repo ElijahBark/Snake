@@ -1,4 +1,16 @@
 let game = new Game(15);
+let view = new View();
+
+view.document.addEventListener('keydown', function (e) {
+    const keyName = e.key;
+    revertSnake(keyName);
+});
+
+
+function revertSnake(keyName) {
+    game.snake.changeDirection(keyName);
+}
+
 View.drawNewField(game.fieldSize);
 View.drawSnake(game.snake.positionOnField);
 
@@ -7,11 +19,6 @@ View.drawApple(game.apple);
 
 setTimeout(function step() {
     game.isSnakeAlive();
-
-    document.addEventListener('keydown', function (e) {
-        const keyName = e.key;
-        game.snake.changeDirection(keyName);
-    });
 
     if (game.snake.isAlive) {
         View.cleanCell(game.snake.tail);

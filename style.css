@@ -16,14 +16,15 @@
 .cell:last-of-type {
     border-right: 1px solid black;
 }
+.red {
+    background-color: #ff0000;
+}
 
 .grey {
     background-color: grey;
 }
 
-.red {
-    background-color: #ff0000;
-}
+
 
 .pop {
     display: none;

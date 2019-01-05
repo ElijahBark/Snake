@@ -1,4 +1,5 @@
-let view, game;
+let view = new View();
+let game;
 
 function Controller() {
     this.step = (function() {
@@ -23,19 +24,19 @@ function Controller() {
                     View.drawCell(game.snake.head);
                 } else {
                     View.gameover();
-                    console.log('fin')
+                    console.log('fin');
                     return;
                 }
 
             }
-
+            console.log(400 - game.snake.positionOnField.length*15);
             setTimeout(this.step, 400 - game.snake.positionOnField.length*15);
 
     }).bind(this);
 
     this.beginNewGame = function(fieldSize = 8) {
-        view = new View();
         game = new Game(fieldSize);
+        console.log(game);
         view.cleanField();
         view.drawScore(game.score);
         view.drawBestScore(game.bestScore);

@@ -10,12 +10,14 @@ let View = function () {
     this.cleanField = function () {
         this.popup.classList.remove('visible');
     };
+    this.fieldSize = this.document.getElementById('field-size');
 
     this.replay = document.getElementsByClassName('replay')[0];
 
     this.replay.addEventListener('click', function () {
-        controller.beginNewGame();
-    });
+        let fieldSize = this.fieldSize.value?this.fieldSize.value:8;
+        controller.beginNewGame(fieldSize);
+    }.bind(this));
     this.score = this.document.getElementsByClassName('score')[0];
     this.bestScore = this.document.getElementsByClassName('best-score')[0];
 
@@ -67,7 +69,7 @@ View.drawCell =function(cell) {
 
 View.drawApple = function (apple) {
     let oldApple = document.getElementsByClassName('red')[0];
-    if (!oldApple) {
+    if (oldApple) {
         oldApple.classList.remove('red');
     }
     document.querySelector(`[data-atr-y='${apple.y}'] > [data-atr-x='${apple.x}']`).classList.add('red');

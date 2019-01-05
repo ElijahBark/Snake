@@ -1,10 +1,9 @@
-let view = new View();
-let game = new Game(8);
+let view, game;
 
 function Controller() {
     this.step = (function() {
 
-        if (game.snake.isAlive) {
+
             if (game.apple.x === game.snake.head.x && game.apple.y === game.snake.head.y) {
                 game.snake.growUp();
                 game.changeScore();
@@ -25,19 +24,18 @@ function Controller() {
                 } else {
                     View.gameover();
                     console.log('fin')
+                    return;
                 }
 
             }
 
-            setTimeout(this.step, 400);
-        } else {
-            View.gameover();
-            console.log('fin')
-        }
+            setTimeout(this.step, 400 - game.snake.positionOnField.length*15);
+
     }).bind(this);
 
-    this.beginNewGame = function() {
-        game = new Game(8);
+    this.beginNewGame = function(fieldSize = 8) {
+        view = new View();
+        game = new Game(fieldSize);
         view.cleanField();
         view.drawScore(game.score);
         view.drawBestScore(game.bestScore);

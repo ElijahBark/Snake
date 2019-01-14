@@ -29,14 +29,12 @@ function Controller() {
                 }
 
             }
-            console.log(400 - game.snake.positionOnField.length*15);
-            setTimeout(this.step, 400 - game.snake.positionOnField.length*15);
+            setTimeout(this.step, Math.max(400 - game.snake.positionOnField.length*game.fieldSize, 150));
 
     }).bind(this);
 
     this.beginNewGame = function(fieldSize = 8) {
         game = new Game(fieldSize);
-        console.log(game);
         view.cleanField();
         view.drawScore(game.score);
         view.drawBestScore(game.bestScore);

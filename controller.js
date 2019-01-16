@@ -2,10 +2,14 @@ let view = new View();
 let game;
 
 function Controller() {
+    this.changeSpeed = function (minSpeed) {
+        return Math.max(400 - game.snake.positionOnField.length*game.fieldSize, minSpeed);
+    };
+
     this.step = (function() {
 
 
-            if (game.apple.x === game.snake.head.x && game.apple.y === game.snake.head.y) {
+            if (game.isSnakeEatApple()) {
                 game.snake.growUp();
                 game.changeScore();
                 game.changeBestScore();
@@ -29,7 +33,7 @@ function Controller() {
                 }
 
             }
-            setTimeout(this.step, Math.max(400 - game.snake.positionOnField.length*game.fieldSize, 150));
+            setTimeout(this.step, this.changeSpeed(150));
 
     }).bind(this);
 

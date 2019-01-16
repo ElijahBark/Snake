@@ -22,6 +22,9 @@ function Game(fieldSize) {
     this.changeScore = function () {
         this.score = this.snake.positionOnField.length;
     };
+    this.isSnakeEatApple = function () {
+        return game.apple.x === game.snake.head.x && game.apple.y === game.snake.head.y;
+    }
 
 
 
@@ -44,7 +47,7 @@ function Snake(direction, head, tail, positionOnField, field) {
     this.isAlive = true;
     this.field = field;
 
-    this.changeDirection = (function (keyName) {
+    this.changeDirection = function (keyName) {
         switch (true) {
             case keyName === 'ArrowUp' && this.oldDirection !== 'down':
                 this.direction = 'up';
@@ -65,7 +68,7 @@ function Snake(direction, head, tail, positionOnField, field) {
                 return;
 
         }
-    }).bind(this);
+    };
 
     this.changeOldDirection = function () {
         this.oldDirection = this.direction;
@@ -77,7 +80,7 @@ function Snake(direction, head, tail, positionOnField, field) {
         }
     };
 
-    this.growUp = function () {
+    this.chooseDirection = function () {
         let xDir = 0;
         let yDir = 0;
         switch (true) {
@@ -94,8 +97,12 @@ function Snake(direction, head, tail, positionOnField, field) {
                 yDir += 1;
                 break;
         }
-        let x = this.head.x + xDir;
-        let y = this.head.y + yDir;
+        return {x : this.head.x + xDir ,y : this.head.y + yDir};
+    };
+
+    this.growUp = function () {
+        let {x,y} = this.chooseDirection();
+
         this.isItPossibleToMove(x,y);
 
         if (this.isAlive) {
